@@ -11,6 +11,41 @@ struct p{
   int waiting_time;
 };
 int st,N;
+void pro_exe(struct p P[],struct p Q1[],struct p Q2[],int Q1_C, int Q2_C){
+
+  	printf("\n Enter the time where to start  :  \n");
+
+  	scanf("%d",&st);
+    fflush(stdin);
+
+  	int t_Q=2,INT_MAXIMUM;
+  	int B_z=0;
+  	int rem_t[N];
+  	int flag ;
+  	int k=0;
+  	int x,i;
+  	int z;
+  	struct p temp;
+  	int comp= 0, t = 0, min_m=Q1[0].burst_time;
+  	int least = 0, fin_time;
+  	int flag1 = 0;
+  	while(1){
+
+  		for (i = 0; i < Q1_C;i++){
+  			rem_t[i] = Q1[i].burst_time;
+  		}
+
+         	while(comp != Q1_C){
+  	       		for (x = 0; x < Q1_C; x++) {
+  	            	if ((Q1[x].arrival_time <= st) && (rem_t[x] <= min_m) && rem_t[x] > 0) {
+  	                	min_m = rem_t[x];
+  	                	least = x;
+  	                	flag1=1;
+  					}
+  	       		}
+  	       }
+  	   }
+  }
 void pro_div(struct p P[],struct p Q1[],struct p Q2[]){
   int Q1_C=0;
   int Q2_C=0;
