@@ -43,6 +43,28 @@ void pro_exe(struct p P[],struct p Q1[],struct p Q2[],int Q1_C, int Q2_C){
   	                	flag1=1;
   					}
   	       		}
+  	       		
+  	       			if(flag1==0) {
+  	            st++;
+  	            continue;
+  	        }
+
+
+  	        rem_t[least]--;
+
+  	        min_m = rem_t[least];
+  	        if(min_m == 0)
+  	             min_m = INT_MAXIMUM;
+
+  			if (rem_t[least] == 0) {
+  	 			     comp++;
+  	            Q1[least].completion_time = st;
+  	            fin_time = st + 1;
+  	 			Q1[least].completion_time = st+1;
+  			}
+
+
+  	        st ++ ;
   	       }
   	   }
   }
