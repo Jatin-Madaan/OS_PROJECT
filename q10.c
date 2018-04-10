@@ -66,6 +66,47 @@ void pro_exe(struct p P[],struct p Q1[],struct p Q2[],int Q1_C, int Q2_C){
 
   	        st ++ ;
   	       }
+  	       
+  	       printf("\n\nQ1 has been  executed !!\n\n");
+  		int a;
+  		for(a=0; a< Q1_C ; a++)
+  		{
+  			printf("\nCompletion time of proc. %d = %d ",Q1[a].process_id,Q1[a].completion_time);
+  		}
+  		        for(x=0;B_z != Q2_C;){
+  					if(Q2[x].burst_time <= t_Q && Q2[x].burst_time >0 ){
+  						st+=Q2[x].burst_time;
+        					Q2[x].burst_time=0;
+       					flag=1;
+  					}
+  					else if(Q2[x].burst_time>0)
+      				{
+       					Q2[x].burst_time-=t_Q;
+        					st+=t_Q;
+     					}
+
+  					if(Q2[x].burst_time==0 && flag==1)
+  				    {
+  				    	B_z++;
+  					  	Q2[x].completion_time = st+1;
+  				      	flag=0;
+  				    }
+  					if(x==Q2_C -1)
+        					x=0;
+  					else if(Q2[x+1].arrival_time<=st)
+        					x++;
+  					else
+        					x=0;
+
+  			}
+  	        printf("\n\nQ2 executed !!\n\n");
+  			for(a=0; a< Q2_C ; a++)
+  				{
+  					printf("\nCompletion time of proc. %d = %d ",Q2[a].process_id,Q2[a].completion_time);
+  				}
+
+  			break;
+  	}
   	   }
   }
 void pro_div(struct p P[],struct p Q1[],struct p Q2[]){
