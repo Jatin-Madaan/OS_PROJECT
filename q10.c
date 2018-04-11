@@ -43,8 +43,9 @@ void pro_exe(struct p P[],struct p Q1[],struct p Q2[],int Q1_C, int Q2_C){
   	                	flag1=1;
   					}
   	       		}
-  	       		
-  	       			if(flag1==0) {
+
+
+  	 		if(flag1==0) {
   	            st++;
   	            continue;
   	        }
@@ -65,9 +66,9 @@ void pro_exe(struct p P[],struct p Q1[],struct p Q2[],int Q1_C, int Q2_C){
 
 
   	        st ++ ;
-  	       }
-  	       
-  	       printf("\n\nQ1 has been  executed !!\n\n");
+  		}
+
+  		printf("\n\nQueue1 has been  executed !!\n\n");
   		int a;
   		for(a=0; a< Q1_C ; a++)
   		{
@@ -99,7 +100,7 @@ void pro_exe(struct p P[],struct p Q1[],struct p Q2[],int Q1_C, int Q2_C){
         					x=0;
 
   			}
-  	        printf("\n\nQ2 executed !!\n\n");
+  	        printf("\n\nQueue2 executed !!");
   			for(a=0; a< Q2_C ; a++)
   				{
   					printf("\nCompletion time of proc. %d = %d ",Q2[a].process_id,Q2[a].completion_time);
@@ -107,8 +108,70 @@ void pro_exe(struct p P[],struct p Q1[],struct p Q2[],int Q1_C, int Q2_C){
 
   			break;
   	}
-  	   }
-  }
+
+  	int avg_tat1=0;
+  	int avg_tat2=0;
+  	int avg_wt1=0;
+  	int avg_wt2=0;
+
+
+  	for(i=0;i<Q1_C;i++){
+  		Q1[i].turnaround_time=Q1[i].completion_time - Q1[i].arrival_time;
+
+  	}
+
+  	for(i=0;i<Q2_C;i++){
+  		Q2[i].turnaround_time=Q2[i].completion_time - Q2[i].arrival_time;
+
+  	}
+
+  	for(i=0;i<Q2_C;i++){
+  		Q2[i].waiting_time=Q2[i].turnaround_time - Q2[i].burst_time;
+
+  	}
+
+  	for(i=0;i<Q1_C;i++){
+  		Q1[i].waiting_time=Q1[i].turnaround_time - Q1[i].burst_time;
+
+  	}
+
+  	printf("\n\nPROCESS NAME |\t TURN AROUND TIME |\t WAITING TIME \n");
+  	for(i=0;i<Q1_C;i++){
+  	printf(" %d             |\t\t%d         |\t\t%d \n",Q1[i].process_id,Q1[i].turnaround_time,Q1[i].waiting_time);
+  	}
+  	for(x=0;x<Q2_C;x++){
+  	printf(" %d             |\t\t%d         |\t\t%d \n ",Q2[x].process_id,Q2[x].turnaround_time,Q2[x].waiting_time);
+  	}
+
+
+  	for(i=0;i<Q1_C;i++){
+
+  		avg_tat1=avg_tat1+Q1[i].turnaround_time;
+  	}
+  	avg_tat1= (avg_tat1 / Q1_C);
+  	for(i=0;i<Q2_C;i++){
+
+  		avg_tat2=avg_tat2+Q2[i].turnaround_time;
+  	}
+  	avg_tat2= (avg_tat2 / Q2_C);
+  	for(i=0;i<Q2_C;i++){
+
+  		avg_wt2=avg_wt2+Q2[i].waiting_time;
+  	}
+  	avg_wt2= (avg_wt2 / Q2_C);
+  	for(i=0;i<Q1_C;i++){
+
+  		avg_wt1=avg_wt1+Q1[i].waiting_time;
+  	}
+  	avg_wt1= (avg_wt1 / Q1_C);
+
+  	printf("\n\nPROCESS process_id |\t AVERAGE TURN AROUND TIME |\t AVERAGE WAITING TIME \n");
+  	printf(" %d            |\t\t%d         |\t\t%d \n",Q1[i].process_id,avg_tat1,avg_wt1);
+  	printf(" %d            |\t\t%d         |\t\t%d \n",Q1[i].process_id,avg_tat2,avg_wt2);
+
+
+}
+
 void pro_div(struct p P[],struct p Q1[],struct p Q2[]){
   int Q1_C=0;
   int Q2_C=0;
@@ -127,7 +190,7 @@ void pro_div(struct p P[],struct p Q1[],struct p Q2[]){
         sleep(1);
       }
 }
-
+pro_exe(P,Q1,Q2,Q1_C,Q2_C);
 }
 
 
